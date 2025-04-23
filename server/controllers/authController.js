@@ -48,6 +48,10 @@ exports.googleCallback = (req, res) => {
 exports.logout = (req, res) => {
   req.logout(() => {
     res.clearCookie('token');
-    res.json({ message: 'Logged out successfully' });
+    const googleLogoutUrl = `https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=${process.env.CLIENT_URL}`;
+    res.json({ 
+      message: 'Logged out successfully',
+      logoutUrl: googleLogoutUrl
+    });
   });
 };
